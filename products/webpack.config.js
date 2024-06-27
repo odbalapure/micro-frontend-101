@@ -12,8 +12,18 @@ module.exports = {
             name: 'products',
             filename: 'remoteEntry.js',
             exposes: {
-                './ProductsIndex': './src/index'
-            }
+                // The `mount` function is exported from bootstrap not `index.js`
+                // './ProductsIndex': './src/index'
+                './ProductsIndex': './src/bootstrap'
+            },
+            // Load 'faker' only once across different service
+            // If the major version is similar
+            shared: ['faker']
+            // shared: {
+            //     faker: {
+            //         singleton: true
+            //     }
+            // }
         }),
         new HtmlWebPackPlugin({
             template: './public/index.html'

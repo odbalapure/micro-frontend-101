@@ -12,11 +12,19 @@ module.exports = {
             name: 'cart',
             filename: 'remoteEntry.js',
             exposes: {
-                './CartShow': './src/index'
-            }
+                './CartShow': './src/bootstrap'
+            },
+            // Load 'faker' only once across different service
+            // If the major version is similar
+            shared: ['faker']
+            // shared: {
+            //     faker: {
+            //         singleton: true
+            //     }
+            // }
         }),
         new HtmlWebPackPlugin({
             template: './public/index.html'
-        })
+        }),
     ]
 }
